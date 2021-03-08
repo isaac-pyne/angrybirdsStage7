@@ -1,3 +1,71 @@
+/*
+//string data type
+var name = "Isaac";
+console.log(name);
+
+//number data type
+var num = 78;
+console.log(num);
+
+//boolean data type
+var bool = false;
+console.log(bool);
+
+//undefined data type
+var x;
+console.log(x);
+
+//reassigning the same undefined var x to null
+//null data type
+x = null;
+console.log(x);
+
+//array - for holding multiple values at once
+var y = [23,34,56.7,89];
+console.log(y);
+
+var z = [78, "mango", "hello", true, 78.9];
+console.log(z);
+
+//length of array - number of elements inside an array
+console.log(z.length);
+
+//accessing the elements of an array
+console.log(z[0]);
+console.log(z[2]);
+
+//array inside an array
+var b = [89, 67, "kite", "wow", false, "no",[1,2,3,4,5]]
+console.log(b);
+console.log(b.length);
+console.log(b[2]);
+console.log(b[6]);
+console.log(b[6][2]);
+console.log(b[6][4]);
+
+//push new values into an array
+b.push("isaac");
+console.log(b);
+console.log(b.length);
+b.push("aishwarya","apple",78);
+console.log(b);
+console.log(b.length);
+
+var n = []; //empty array
+console.log(n);
+
+var p = [23,34,56];
+console.log(p);
+
+n.push(p)
+console.log(n);
+
+//pop out of last value from array
+b.pop();
+console.log(b);
+
+*/
+
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
@@ -7,7 +75,7 @@ var engine, world;
 var box1, pig1,pig3;
 var backgroundImg,platform;
 var bird, slingshot;
-
+var gamestate = "onSling";
 
 function preload() {
     backgroundImg = loadImage("sprites/bg.png");
@@ -69,12 +137,16 @@ function draw(){
 }
 
 function mouseDragged(){
-    Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    if(gamestate !== "launched"){
+        Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    }
+  
 }
 
 
 function mouseReleased(){
     slingshot.fly();
+    gamestate = "launched"
 }
 
 function keyPressed(){
